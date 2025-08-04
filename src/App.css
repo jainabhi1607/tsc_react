@@ -1,0 +1,11 @@
+.login-bg {
+  background: #253135;
+  display: inline-block;
+  width: 100%;
+}
+body .navbar-default {
+  background-color: #F0FBFF;
+}
+html body{background-color: #FFF;}
+.client_dashboard canvas{width: 100%;}
+.paddT3{padding-top: 3px;}
