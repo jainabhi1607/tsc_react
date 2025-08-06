@@ -8,7 +8,9 @@ function First() {
       const location = useLocation();
       const pathName = location.pathname;
   return (
-    <><div id="wrapper">
+    <>
+    {pathName.length && pathName === '/login' ? <div className="login-bg"><div className="login-section"><Outlet/></div></div> :
+    <div id="wrapper">
     {pathName.length && pathName !== '/login' && pathName !== '/createaccount' ? <Header/> : ""}
     {pathName.length && pathName !== '/login' && pathName !== '/createaccount' ? <Sidebar/> : ""}
     <div id="page-wrapper" className="dashbard-1">
@@ -23,6 +25,7 @@ function First() {
     <div className="page-content"><Outlet/></div>
     {pathName.length && pathName !== '/login' && pathName !== '/createaccount' ? <Footer/> : ""}</div>
     </div>
+}
     </>
   )
 }

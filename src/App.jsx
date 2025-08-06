@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         path: "/createaccount/:id",
         element: < CreateAccount/>
       }
-    ]
+    ],
   }
 ])
 
