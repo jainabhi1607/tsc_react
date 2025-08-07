@@ -1,7 +1,10 @@
 .login-bg {
-  background: #253135;
   display: inline-block;
   width: 100%;
+}
+.login-bg {
+  height: 100vh;
+   
 }
 body .navbar-default {
   background-color: #F0FBFF;
