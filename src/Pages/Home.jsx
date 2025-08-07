@@ -9,18 +9,19 @@ function Home() {
   const navigate = useNavigate();
   const [recentSupportTickets, setRecentSupportTickets] = useState([]);
   const [maintainanceTypes, setMaintainanceTypes] = useState([]);
-
   const dispatch = useDispatch();
   let userData = "";
-  if (sessionStorage.getItem("userData") !== "" && sessionStorage.getItem("userData") !== null) {
+  if (
+    sessionStorage.getItem("userData") !== "" &&
+    sessionStorage.getItem("userData") !== null
+  ) {
     userData = JSON.parse(sessionStorage.getItem("userData"));
 
     const userId = userData.id;
     useEffect(() => {
       dispatch(fetchHomeData(userId));
     }, []);
-  }
-  else{
+  } else {
     navigate("/login", { replace: true });
   }
 

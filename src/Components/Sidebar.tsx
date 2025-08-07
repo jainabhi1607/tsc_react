@@ -27,37 +27,37 @@ function Sidebar() {
       <ul className="nav metismenu" id="side-menu">
          <li className="divider"></li>
                     <li className="active">
-            <a href="http://localhost/coxy/totalspray/admin/">
+            <a href="/">
                <span className="dashboard-icon menu-icon"></span>
                <span className="menu-item">Dashboard</span>
             </a>
          </li>
          <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/job_cards">
+            <a href="/service">
                <span className="construction-icon menu-icon"></span>
                <span className="menu-item">Service</span>
             </a>
          </li>
                   <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/support_tickets">
+            <a href="/support_tickets">
                <span className="support_tickets-icon menu-icon"></span>
                <span className="menu-item">Support Tickets</span>
             </a>
          </li>
          <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/clients">
+            <a href="/clients">
                <span className="user-icon menu-icon"></span>
                <span className="menu-item">Sites</span>
             </a>
          </li>
          <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/clients/asset_listing">
+            <a href="/asset_listing">
                <span className="resources-icon menu-icon"></span>
                <span className="menu-item">Assets </span>
             </a>
          </li>
          <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/clients/contact_listing">
+            <a href="/contact_listing">
                <span className="phone menu-icon"></span>
                <span className="menu-item">Contacts </span>
             </a>
@@ -65,20 +65,20 @@ function Sidebar() {
          <li className="divider"></li>
            <div className="page-heading-border"></div>
          <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/global_settings/archive">
+            <a href="/archive">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                <span className="menu-item">Company</span>
             </a>
          </li>
                    <li className="divider"></li>
          <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/global_settings">
+            <a href="/global_settings">
                <span className="user-icon menu-icon"></span>
                <span className="menu-item">Users</span>
             </a>
          </li>
          <li className="">
-            <a href="http://localhost/coxy/totalspray/admin/users">
+            <a href="/users">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#323E42" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users "><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                <span className="menu-item">User Groups</span>
             </a>
