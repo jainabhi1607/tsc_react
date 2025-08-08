@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import { useState, useEffect } from "react";
 import BarChart from "../Components/BarChart";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomeData } from "../Slices/userSlice";

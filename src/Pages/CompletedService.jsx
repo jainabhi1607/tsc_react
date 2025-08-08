@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchserviceData } from "../Slices/serviceSlice";
 import { useEffect } from "react";
 
-function Service() {
+function CompletedService() {
   const dispatch = useDispatch();
 
   let userData = "";
@@ -14,7 +14,7 @@ function Service() {
 
     const userId = userData.id;
     useEffect(() => {
-      dispatch(fetchserviceData({"userId" : userId,"completed" :0}));
+      dispatch(fetchserviceData({"userId" : userId,"completed" :1}));
     }, []);
   } else {
     navigate("/login", { replace: true });
@@ -29,10 +29,10 @@ function Service() {
       
  <div class="clear"></div>
     <ul class="websites-tabs">
-  <li class="active ticket_status">
+  <li class="ticket_status">
     <a href="/service">Upcoming </a>
   </li>
-  <li class="ticket_status">
+  <li class="active ticket_status">
     <a href="/completed">Completed</a>
   </li>
 </ul>
@@ -77,4 +77,4 @@ function Service() {
   );
 }
 
-export default Service;
+export default CompletedService;
