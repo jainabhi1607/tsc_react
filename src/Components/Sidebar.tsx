@@ -40,8 +40,8 @@ function Sidebar() {
                <span className="menu-item">Service</span>
             </a>
          </li>
-                  <li className="">
-            <a href="/support_tickets">
+                  <li className={location === '/support' ? "active" : ""}>
+            <a href="/support">
                <span className="support_tickets-icon menu-icon"></span>
                <span className="menu-item">Support Tickets</span>
             </a>

@@ -12,6 +12,7 @@ import './App.css'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store.js";
+import Support from './Pages/Support.jsx'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
       {
         path: "/completed",
         element: < CompletedService/>
+      },
+      {
+        path: "/support",
+        element: < Support/>
       }
     ],
   }

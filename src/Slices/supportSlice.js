@@ -1,0 +1,38 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const fetchsupportData = createAsyncThunk("tec/fetchsupportData",
+  async (userData) => {
+    console.log("status",userData)
+    const result = await axios.get("https://tsc.sterlinginfotech.com/users/supportTicketReact/" + userData.userId+'/'+userData.completed);
+    //console.log("Result data",result.data.data)
+    return result.data.data;
+  }
+)
+
+export const supportSl = createSlice({
+  name: "supportSlice",
+  initialState: {
+    supportData : [],
+  },
+  reducers: {
+
+  },
+   extraReducers: (builder) => {
+    builder
+      .addCase(fetchsupportData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchsupportData.fulfilled, (state, action) => {
+        state.supportData = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchsupportData.rejected, (state) => {
+        state.loading = false;
+        state.error = "There was an error";
+      })
+  },
+});
+
+export const { userId, isLogin,supportData, } =supportSl.actions; //exported to UI
+export const tscSupportReducer = supportSl.reducer; //exported to store
