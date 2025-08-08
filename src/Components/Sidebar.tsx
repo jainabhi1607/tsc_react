@@ -1,8 +1,10 @@
 import Logo from "../assets/images/logo.svg";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation  } from 'react-router-dom';
 function Sidebar() {
 
    const navigate = useNavigate();
+   const locationArr = useLocation();
+   const location = locationArr.pathname
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -26,13 +28,13 @@ function Sidebar() {
       </div>
       <ul className="nav metismenu" id="side-menu">
          <li className="divider"></li>
-                    <li className="active">
+                    <li className={location === '/'? "active" : ""}>
             <a href="/">
                <span className="dashboard-icon menu-icon"></span>
                <span className="menu-item">Dashboard</span>
             </a>
          </li>
-         <li className="">
+         <li className={location === '/service' || location === '/completed' ? "active" : ""}>
             <a href="/service">
                <span className="construction-icon menu-icon"></span>
                <span className="menu-item">Service</span>
