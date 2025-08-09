@@ -13,5 +13,5 @@ html body{background-color: #FFF;}
 .client_dashboard canvas{width: 100%;}
 .paddT3{padding-top: 3px;}
 
-.sidebar-top{background: #272D34;
+.sidebar-top{background: #272D34;padding-top: 12px;
   height: 54px;}
