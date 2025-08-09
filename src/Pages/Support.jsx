@@ -14,7 +14,7 @@ function Support() {
 
     const userId = userData.id;
     useEffect(() => {
-      dispatch(fetchsupportData({ userId: userId, completed: 0 }));
+      dispatch(fetchsupportData({ userId: userId }));
     }, []);
   } else {
     navigate("/login", { replace: true });
@@ -23,29 +23,36 @@ function Support() {
   const data = useSelector(function (state) {
     return state.tscSupportStore;
   });
+  console.log("Support", data);
   return (
     <>
       <h1 className="page-heading marB10">Support Tickets</h1>
 
-      <div>
+      <div className="support_ticket_listing">
         <div
           id="support_ticket"
-          className="form-inline dt-bootstrap ticket-listing support_ticket_listing client_access">
+          className="form-inline dt-bootstrap ticket-listing support_ticket_listing client_access"
+        >
           <table className="table table-striped table-hover dataTables-example10">
             <thead>
               <tr role="row">
                 <th>Ticket No.</th>
-
                 {JSON.parse(sessionStorage.getItem("userData"))?.role < 4 ? (
                   <>
-                    <th>Client Site</th>
-                    <th>Asset</th>
+                    <th>Client Name</th>
                   </>
                 ) : (
+                  ""
+                )}
+                <th>Client Site</th>
+                <th>Asset</th>
+                {JSON.parse(sessionStorage.getItem("userData"))?.role >= 4 ? (
                   <>
                     <th>Requester</th>
                     <th>Lodged Date</th>
                   </>
+                ) : (
+                  ""
                 )}
 
                 {JSON.parse(sessionStorage.getItem("userData"))?.role < 4 && (
@@ -67,16 +74,49 @@ function Support() {
                     <>
                       <tr>
                         <td className="paddL25">{result.ticket_no}</td>
+                        
+                        {JSON.parse(sessionStorage.getItem("userData"))?.role < 
+                          4 && (
+                          <>
+                            <td>{result.company_name}</td>
+                          </>
+                        )}
+
                         <td>{result.site_name}</td>
                         <td>{result.machine_name}</td>
-                        <td>{result.job_date}</td>
-                        <td>{result.type}</td>
+                        {JSON.parse(sessionStorage.getItem("userData"))?.role >=
+                          4 && (
+                          <>
+                            <td>{result.contact_name}</td>
+                            <td>{result.date}</td>
+                          </>
+                        )}
+
+                        {JSON.parse(sessionStorage.getItem("userData"))?.role <
+                          4 && (
+                          <>
+                            <td>{result.title}</td>
+                            <td>{result.age}</td>
+                            <td>{result.technicians}</td>
+                          </>
+                        )}
+
                         <td className="paddB0">
-                          <span className="status client_ticket_status ticket_status_{result.status}">
+                          <span
+                            className={`status ${
+                              result.status
+                                ? `ticket_status_${result.status} client_ticket_status_${result.status}`
+                                : ""
+                            }`}
+                          >
                             {result.status_display}
                           </span>
                         </td>
-                        <td className="paddR0 paddL0"></td>
+                        <td className="paddR0 paddL0">
+                          <a href="#" class="comment-operations icon">
+                            <span class="arrow-right"></span>
+                          </a>
+                        </td>
                       </tr>
                     </>
                   );

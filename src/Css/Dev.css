@@ -1,3 +1,20 @@
+.image_span {
+  display: flex;
+  align-items: center;    /* Vertical center */
+  justify-content: center; /* Optional: horizontal center */
+  height: 85px;
+  overflow: hidden;
+     border: 1px solid #ddd;     
+}
+
+.image_span img {
+  max-height: 100%;
+  width: auto;
+  object-fit: contain;
+}
+.aws_images.img-thumbnail.image-thumb {
+  border: 0px;
+}
 #imageCarouselModal .modal-dialog {
     width: 100%;
     max-width: 100%;
@@ -8785,7 +8802,6 @@ body {
 }
 .login-bg {
    background: #253135;
-   
 }
 .login-section > .login-section-1 {
    margin: 0;

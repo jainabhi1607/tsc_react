@@ -3,8 +3,7 @@ import axios from "axios";
 
 export const fetchsupportData = createAsyncThunk("tec/fetchsupportData",
   async (userData) => {
-    console.log("status",userData)
-    const result = await axios.get("https://tsc.sterlinginfotech.com/users/supportTicketReact/" + userData.userId+'/'+userData.completed);
+    const result = await axios.get("https://tsc.sterlinginfotech.com/users/supportTicketReact/" + userData.userId);
     //console.log("Result data",result.data.data)
     return result.data.data;
   }
