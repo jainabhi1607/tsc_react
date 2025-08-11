@@ -23,6 +23,7 @@ function Service() {
   const data = useSelector(function (state) {
     return state.tscServiceStore;
   });
+  console.log("Data",data)
   return (
     <>
       <h1 className="page-heading marB10">Services</h1>
@@ -51,19 +52,19 @@ function Service() {
             </tr>
           </thead>
           <tbody>
-            {Object.values(data.serviceData).length > 0 &&
-              Object.values(data.serviceData).map((result) => {
+            {Object.values(data?.serviceData?.results).length > 0 &&
+              Object.values(data?.serviceData?.results).map((result) => {
                 return (
                   <>
                     <tr>
                       <td className="paddL25">{result.ticket_no}</td>
-                      <td>{result.site_name}</td>
-                      <td>{result.machine_name}</td>
-                      <td>{result.job_date}</td>
-                      <td>{result.type}</td>
+                      <td>{result.ClientSites.site_name}</td>
+                      <td>{result.ClientAssets?.machine_name}</td>
+                      <td>{result?.job_date}</td>
+                      <td>{result.JobCardTypes?.title}</td>
                       <td className="paddB0">
                         <span className="status client_ticket_status ticket_status_{result.status}">
-                          {result.status_display}
+                          {result?.status_display}
                         </span>
                       </td>
                       <td className="paddR0 paddL0">

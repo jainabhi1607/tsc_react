@@ -4,8 +4,8 @@ import axios from "axios";
 export const fetchHomeData = createAsyncThunk("tec/fetchHomeData",
   async (userId) => {
     const result = await axios.get("https://tsc.sterlinginfotech.com/users/dashboardReact/" + userId);
-    //console.log("Result data",result.data.data)
-    return result.data.data;
+    //console.log("Result data",result.data)
+    return result.data;
   }
 )
 

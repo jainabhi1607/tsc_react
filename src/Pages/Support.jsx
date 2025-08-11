@@ -23,7 +23,6 @@ function Support() {
   const data = useSelector(function (state) {
     return state.tscSupportStore;
   });
-  console.log("Support", data);
   return (
     <>
       <h1 className="page-heading marB10">Support Tickets</h1>
@@ -37,7 +36,7 @@ function Support() {
             <thead>
               <tr role="row">
                 <th>Ticket No.</th>
-                {JSON.parse(sessionStorage.getItem("userData"))?.role < 4 ? (
+                {userData?.role < 4 ? (
                   <>
                     <th>Client Name</th>
                   </>
@@ -46,7 +45,7 @@ function Support() {
                 )}
                 <th>Client Site</th>
                 <th>Asset</th>
-                {JSON.parse(sessionStorage.getItem("userData"))?.role >= 4 ? (
+                {userData?.role >= 4 ? (
                   <>
                     <th>Requester</th>
                     <th>Lodged Date</th>
@@ -55,7 +54,7 @@ function Support() {
                   ""
                 )}
 
-                {JSON.parse(sessionStorage.getItem("userData"))?.role < 4 && (
+                {userData?.role < 4 && (
                   <>
                     <th>Job Title</th>
                     <th>Age</th>
@@ -68,14 +67,14 @@ function Support() {
               </tr>
             </thead>
             <tbody>
-              {Object.values(data.supportData).length > 0 &&
-                Object.values(data.supportData).map((result) => {
+              {Object.values(data.supportData.data).length > 0 &&
+                Object.values(data.supportData.data).map((result) => {
                   return (
                     <>
                       <tr>
                         <td className="paddL25">{result.ticket_no}</td>
                         
-                        {JSON.parse(sessionStorage.getItem("userData"))?.role < 
+                        {userData?.role < 
                           4 && (
                           <>
                             <td>{result.company_name}</td>
@@ -84,7 +83,7 @@ function Support() {
 
                         <td>{result.site_name}</td>
                         <td>{result.machine_name}</td>
-                        {JSON.parse(sessionStorage.getItem("userData"))?.role >=
+                        {userData?.role >=
                           4 && (
                           <>
                             <td>{result.contact_name}</td>
@@ -92,7 +91,7 @@ function Support() {
                           </>
                         )}
 
-                        {JSON.parse(sessionStorage.getItem("userData"))?.role <
+                        {userData?.role <
                           4 && (
                           <>
                             <td>{result.title}</td>

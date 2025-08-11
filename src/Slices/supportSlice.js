@@ -5,7 +5,7 @@ export const fetchsupportData = createAsyncThunk("tec/fetchsupportData",
   async (userData) => {
     const result = await axios.get("https://tsc.sterlinginfotech.com/users/supportTicketReact/" + userData.userId);
     //console.log("Result data",result.data.data)
-    return result.data.data;
+    return result.data;
   }
 )
 

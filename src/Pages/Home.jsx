@@ -27,7 +27,7 @@ function Home() {
   const data = useSelector(function (state) {
     return state.tscStore;
   });
-
+  
   const [jobsImp, setJobsImp] = useState([
     10, 20, 30, 15, 25, 35, 40, 30, 20, 10, 5, 15,
   ]);
