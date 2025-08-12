@@ -3,7 +3,6 @@ import axios from "axios";
 
 export const fetchserviceData = createAsyncThunk("tec/fetchserviceData",
   async (userData) => {
-    console.log("status","https://tsc.sterlinginfotech.com/users/serviceReact/" + userData.userId+'/'+userData.completed)
     const result = await axios.get("https://tsc.sterlinginfotech.com/users/serviceReact/" + userData.userId+'/'+userData.completed);
     console.log("Result data",result.data)
     return result.data;
@@ -34,5 +33,5 @@ export const serviceSl = createSlice({
   },
 });
 
-export const { userId, isLogin,serviceData, } =serviceSl.actions; //exported to UI
+export const { serviceData } =serviceSl.actions; //exported to UI
 export const tscServiceReducer = serviceSl.reducer; //exported to store

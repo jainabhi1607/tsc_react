@@ -1,6 +1,7 @@
+import {useState,  useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchserviceData } from "../Slices/serviceSlice";
-import { useEffect } from "react";
+
 
 function Service() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function Service() {
 
     const userId = userData.id;
     useEffect(() => {
+      console.log('come in use effect')
       dispatch(fetchserviceData({ userId: userId, completed: 0 }));
     }, []);
   } else {
