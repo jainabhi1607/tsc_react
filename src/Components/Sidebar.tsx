@@ -86,7 +86,7 @@ function Sidebar() {
             </a>
          </li>
                   <li>
-               <a href="" onClick={handleLogout}>
+               <a href="/" onClick={handleLogout}>
                <span className="logout-icon menu-icon"></span>
                <span className="menu-item">Logout</span>
             </a>

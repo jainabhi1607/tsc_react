@@ -1,24 +1,30 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchsupportData } from "../Slices/supportSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Support() {
   const dispatch = useDispatch();
+  const [userId, setUserId] = useState();
 
   let userData = "";
-  if (
-    sessionStorage.getItem("userData") !== "" &&
-    sessionStorage.getItem("userData") !== null
-  ) {
-    userData = JSON.parse(sessionStorage.getItem("userData"));
+  useEffect(() => {
+    if (
+      sessionStorage.getItem("userData") !== "" &&
+      sessionStorage.getItem("userData") !== null
+    ) {
+      userData = JSON.parse(sessionStorage.getItem("userData"));
 
-    const userId = userData.id;
-    useEffect(() => {
+      setUserId(userData.id);
+    } else {
+      navigate("/login", { replace: true });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userId) {
       dispatch(fetchsupportData({ userId: userId }));
-    }, []);
-  } else {
-    navigate("/login", { replace: true });
-  }
+    }
+  }, [userId]);
 
   const data = useSelector(function (state) {
     return state.tscSupportStore;
@@ -67,15 +73,15 @@ function Support() {
               </tr>
             </thead>
             <tbody>
-              {Object.values(data.supportData.data).length > 0 &&
+              {data?.supportData?.data &&
+                Object.values(data.supportData.data).length > 0 &&
                 Object.values(data.supportData.data).map((result) => {
                   return (
                     <>
                       <tr>
                         <td className="paddL25">{result.ticket_no}</td>
-                        
-                        {userData?.role < 
-                          4 && (
+
+                        {userData?.role < 4 && (
                           <>
                             <td>{result.company_name}</td>
                           </>
@@ -83,16 +89,14 @@ function Support() {
 
                         <td>{result.site_name}</td>
                         <td>{result.machine_name}</td>
-                        {userData?.role >=
-                          4 && (
+                        {userData?.role >= 4 && (
                           <>
                             <td>{result.contact_name}</td>
                             <td>{result.date}</td>
                           </>
                         )}
 
-                        {userData?.role <
-                          4 && (
+                        {userData?.role < 4 && (
                           <>
                             <td>{result.title}</td>
                             <td>{result.age}</td>
