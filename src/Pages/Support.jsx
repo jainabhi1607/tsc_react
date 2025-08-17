@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchsupportData } from "../Slices/supportSlice";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Support() {
   const dispatch = useDispatch();
@@ -116,9 +117,7 @@ function Support() {
                           </span>
                         </td>
                         <td className="paddR0 paddL0">
-                          <a href="#" class="comment-operations icon">
-                            <span class="arrow-right"></span>
-                          </a>
+                          <Link className="comment-operations icon" to={`/support_client_view/${result.id}`}><span class="arrow-right"></span></Link>
                         </td>
                       </tr>
                     </>

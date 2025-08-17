@@ -91,7 +91,7 @@ function Login() {
                         placeholder="Username"
                         onInput={(e) => setUsername(e.target.value)}
                         id="username"
-                      ></input>{" "}
+                      ></input>
                     </div>
                   </div>
                   <div className="form-group marB0">
@@ -103,7 +103,7 @@ function Login() {
                         placeholder="Password"
                         onInput={(e) => setPassword(e.target.value)}
                         id="password"
-                      ></input>{" "}
+                      ></input>
                     </div>
                   </div>
                   <div className="clear paddB20"></div>

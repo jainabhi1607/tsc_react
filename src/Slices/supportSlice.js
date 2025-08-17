@@ -1,23 +1,38 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchsupportData = createAsyncThunk("tec/fetchsupportData",
+export const fetchsupportData = createAsyncThunk(
+  "tec/fetchsupportData",
   async (userData) => {
-    const result = await axios.get("https://tsc.sterlinginfotech.com/users/supportTicketReact/" + userData.userId);
+    const result = await axios.get(
+      "http://localhost/coxy/totalspray/users/supportTicketReact/" + userData.userId
+    );
     //console.log("Result data",result.data.data)
     return result.data;
   }
-)
+);
+
+export const fetchSingleSupportData = createAsyncThunk(
+  "tec/fetchSingleSupportData",
+  async (userData) => {
+    console.log("https://tsc.sterlinginfotech.com/users/supportTicketClientViewReact/" +
+        userData.userId + "/" + userData.id);
+    const result = await axios.get(
+      "https://tsc.sterlinginfotech.com/users/supportTicketClientViewReact/" +
+        userData.userId + "/" + userData.id
+    );
+    return result.data;
+  }
+);
 
 export const supportSl = createSlice({
   name: "supportSlice",
   initialState: {
-    supportData : [],
+    supportData: [],
+    supportClientViewData: [],
   },
-  reducers: {
-
-  },
-   extraReducers: (builder) => {
+  reducers: {},
+  extraReducers: (builder) => {
     builder
       .addCase(fetchsupportData.pending, (state) => {
         state.loading = true;
@@ -30,8 +45,20 @@ export const supportSl = createSlice({
         state.loading = false;
         state.error = "There was an error";
       })
+      .addCase(fetchSingleSupportData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchSingleSupportData.fulfilled, (state, action) => {
+        state.supportClientViewData = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchSingleSupportData.rejected, (state) => {
+        state.loading = false;
+        state.error = "There was an error";
+      })
+      ;
   },
 });
 
-export const { userId, isLogin,supportData, } =supportSl.actions; //exported to UI
+export const { userId, isLogin, supportData, supportClientViewData } = supportSl.actions; //exported to UI
 export const tscSupportReducer = supportSl.reducer; //exported to store
