@@ -15,8 +15,6 @@ export const fetchsupportData = createAsyncThunk(
 export const fetchSingleSupportData = createAsyncThunk(
   "tec/fetchSingleSupportData",
   async (userData) => {
-    console.log("https://tsc.sterlinginfotech.com/users/supportTicketClientViewReact/" +
-        userData.userId + "/" + userData.id);
     const result = await axios.get(
       "https://tsc.sterlinginfotech.com/users/supportTicketClientViewReact/" +
         userData.userId + "/" + userData.id

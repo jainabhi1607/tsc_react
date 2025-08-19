@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleSupportData } from "../../Slices/supportSlice";
 import { useParams } from "react-router-dom";
+import ClientViewAttachments from "../../Components/ClientViewAttachments";
 
 function ClientView() {
   const dispatch = useDispatch();
@@ -10,23 +11,23 @@ function ClientView() {
   const [userRole, setUserRole] = useState(null);
 
   let userData = "";
-  let optionsDate = { 
-  weekday: 'long', 
-  year: 'numeric', 
-  month: 'long', 
-  day: 'numeric' 
-};
-let options1Date = { 
-  day: 'numeric' ,
-  month: 'long', 
-  year: 'numeric'
-};
+  let optionsDate = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  let options1Date = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
 
-let optionsTime = { 
-  hour: '2-digit', 
-  minute: '2-digit', 
-  hour12: true 
-};
+  let optionsTime = {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  };
 
   useEffect(() => {
     if (
@@ -56,7 +57,7 @@ let optionsTime = {
     <>
       {data?.supportClientViewData?.details?.ticket_no !== ""}
       {
-        <div>
+        <div className="parent-page-class listing-page detail-page job-card-view client-job-card-view left-align">
           <h1 className="page-heading marB58">
             <a href="support" className="back-icon"></a>
             <span>
@@ -183,7 +184,10 @@ let optionsTime = {
                         id="public_private"
                         className="public_private_class"
                       />
-                      <label for="public_private" className="public_private_class">
+                      <label
+                        for="public_private"
+                        className="public_private_class"
+                      >
                         Make Public
                       </label>
                     </>
@@ -192,7 +196,6 @@ let optionsTime = {
                   <div className="clear paddB30"></div>
                 </div>
               </form>
-              {console.log(data?.supportClientViewData?.comments)}
               {data?.supportClientViewData?.comments &&
                 Object.values(data.supportClientViewData.comments).length > 0 &&
                 Object.values(data.supportClientViewData.comments).map(
@@ -212,25 +215,31 @@ let optionsTime = {
                       message !== undefined &&
                       message.indexOf("Job Card Status Change: ") !== -1
                     ) {
-                      message = message.replace(
-                        "Job Card Status Change: ",
-                        ""
-                      );
+                      message = message.replace("Job Card Status Change: ", "");
                     }
                     let date = new Date(result.date_time);
-                    let formattedDate = date.toLocaleDateString('en-US', optionsDate); 
-                    let formattedTime = date.toLocaleTimeString('en-US', optionsTime);
-                    let final_date = formattedDate.replace(",", "") + " - " + formattedTime.replace(" ", "").toUpperCase();
+                    let formattedDate = date.toLocaleDateString(
+                      "en-US",
+                      optionsDate
+                    );
+                    let formattedTime = date.toLocaleTimeString(
+                      "en-US",
+                      optionsTime
+                    );
+                    let final_date =
+                      formattedDate.replace(",", "") +
+                      " - " +
+                      formattedTime.replace(" ", "").toUpperCase();
 
-                      return (
-                        <>
-                          <div className={className}>
-                            <span className="blue-color">{final_date}</span>
-                            <div className="clear paddB10"></div>
-                            <div className="black-color">{message}</div>
-                          </div>
-                        </>
-                      );
+                    return (
+                      <>
+                        <div className={className}>
+                          <span className="blue-color">{final_date}</span>
+                          <div className="clear paddB10"></div>
+                          <div className="black-color">{message}</div>
+                        </div>
+                      </>
+                    );
                   }
                 )}
             </div>
@@ -238,52 +247,110 @@ let optionsTime = {
 
           <div className="col-lg-4 paddR0">
             <div className="table-responsive job-card-sidebar">
-               <h3 className="bold600">Ticket Progress</h3>
-               <div className="clear paddB10"></div>
-               <div className="ticket_progress">
-                      <span className="ticket_circle"></span>
-                    <span>Ticket Created<br/><span className="paddL28">
-                      {data?.supportClientViewData?.details?.dat_time}
-                      </span></span>
-                    <div className="clear paddB10"></div>
-                    <span className="left-border"></span>
-                    <div className="clear paddB25"></div>
-                    
-                      <span className={`ticket_circle ${data?.supportClientViewData?.details?.ticket_status < 2 ? "ticket_disabled" : "red-circle"}`}></span>
-                    <span className={`${data?.supportClientViewData?.details?.ticket_status < 2 ? "ticket_disabled" :""}`}>In Progress</span>
-                    <div className="clear paddB25"></div>
-                    <span className="left-border"></span>
-                    <div className="clear paddB25"></div>
+              <h3 className="bold600">Ticket Progress</h3>
+              <div className="clear paddB10"></div>
+              <div className="ticket_progress">
+                <span className="ticket_circle"></span>
+                <span>
+                  Ticket Created
+                  <br />
+                  <span className="paddL28">
+                    {data?.supportClientViewData?.details?.dat_time}
+                  </span>
+                </span>
+                <div className="clear paddB10"></div>
+                <span className="left-border"></span>
+                <div className="clear paddB25"></div>
 
-                      <span className={`ticket_circle ${data?.supportClientViewData?.details?.ticket_status < 3 ? "ticket_disabled" : "yellow-circle"}`}></span>
+                <span
+                  className={`ticket_circle ${
+                    data?.supportClientViewData?.details?.ticket_status < 2
+                      ? "ticket_disabled"
+                      : "red-circle"
+                  }`}
+                ></span>
+                <span
+                  className={`${
+                    data?.supportClientViewData?.details?.ticket_status < 2
+                      ? "ticket_disabled"
+                      : ""
+                  }`}
+                >
+                  In Progress
+                </span>
+                <div className="clear paddB25"></div>
+                <span className="left-border"></span>
+                <div className="clear paddB25"></div>
 
-                    <span className={`${data?.supportClientViewData?.details?.ticket_status < 3 ? "ticket_disabled" :""}`}>Technician Required<br/>
-                    
-                    
-                    <span className="paddL28">{data?.supportClientViewData?.details?.ticket_status >= 3 && data?.supportClientViewData?.details?.JobCards?.job_date !== '' ? "Job Date: "+data.supportClientViewData.details.JobCards.job_date :""}
-                    
-                    </span></span>
-                    <div className="clear paddB10"></div>
-                    <span className="left-border"></span>
-                    <div className="clear paddB25"></div>
+                <span
+                  className={`ticket_circle ${
+                    data?.supportClientViewData?.details?.ticket_status < 3
+                      ? "ticket_disabled"
+                      : "yellow-circle"
+                  }`}
+                ></span>
 
-                      <span className={`ticket_circle ${data?.supportClientViewData?.details?.ticket_status < 4 ? "ticket_disabled" : "blue-circle"}`}></span>
+                <span
+                  className={`${
+                    data?.supportClientViewData?.details?.ticket_status < 3
+                      ? "ticket_disabled"
+                      : ""
+                  }`}
+                >
+                  Technician Required
+                  <br />
+                  <span className="paddL28">
+                    {data?.supportClientViewData?.details?.ticket_status >= 3 &&
+                    data?.supportClientViewData?.details?.JobCards?.job_date !==
+                      ""
+                      ? "Job Date: " +
+                        data.supportClientViewData.details.JobCards.job_date
+                      : ""}
+                  </span>
+                </span>
+                <div className="clear paddB10"></div>
+                <span className="left-border"></span>
+                <div className="clear paddB25"></div>
 
-                    <span className={`${data?.supportClientViewData?.details?.ticket_status < 4 ? "ticket_disabled" :""}`}>Ticket Closed<br/>
-                    
-                    <span className="paddL28">                         
-                         {data?.supportClientViewData?.details?.ticket_status >= 4 && data?.supportClientViewData?.details?.SupportTicketDetails?.resolved_date !== '' ? data.supportClientViewData.details.SupportTicketDetails.resolved_date :""}
-                         </span></span>
-                 </div>
+                <span
+                  className={`ticket_circle ${
+                    data?.supportClientViewData?.details?.ticket_status < 4
+                      ? "ticket_disabled"
+                      : "blue-circle"
+                  }`}
+                ></span>
+
+                <span
+                  className={`${
+                    data?.supportClientViewData?.details?.ticket_status < 4
+                      ? "ticket_disabled"
+                      : ""
+                  }`}
+                >
+                  Ticket Closed
+                  <br />
+                  <span className="paddL28">
+                    {data?.supportClientViewData?.details?.ticket_status >= 4 &&
+                    data?.supportClientViewData?.details?.SupportTicketDetails
+                      ?.resolved_date !== ""
+                      ? data.supportClientViewData.details.SupportTicketDetails
+                          .resolved_date
+                      : ""}
+                  </span>
+                </span>
+              </div>
             </div>
             <div className="table-responsive">
-               <label className="job-sub-heading width100">Attachments <span className="float-right normal gray-color">Total </span></label>
-               <div className="clear paddB10"></div>
-               
-               <div className="clear paddB10"></div>
-            </div>
-         </div>
+              <label className="job-sub-heading width100">
+                Attachments
+                <span className="float-right normal gray-color">Total {data?.supportClientViewData?.attachements?.length}</span>
+              </label>
+              <div className="clear paddB10"></div>
+              <ClientViewAttachments data={data?.supportClientViewData?.attachements} userId = {userId} userRole = {userRole} />
 
+              <div className="clear paddB10"></div>
+            </div>
+          </div>
         </div>
       }
     </>
