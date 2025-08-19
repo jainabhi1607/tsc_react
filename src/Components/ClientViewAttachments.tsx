@@ -16,6 +16,9 @@ function ClientViewAttachments(props) {
             fileExtension === "doc" ||
             fileExtension === "docx"
           ) {
+            let first = encrypt(result.id.toString()+'first');
+            let second = encrypt(result.id.toString()+'Second');
+            let id_encrypted = encrypt(result.id.toString());
             return (
               <>
                 <div className="col-lg-12 paddR0 paddL0">
@@ -23,7 +26,7 @@ function ClientViewAttachments(props) {
                   <label className="float-right document_attachments">
                     {props.userRole < 4 && (
                       <a
-                        href="javascript:void(0)"
+                        href={`https://app.totalsprayboothcare.com/users/openPdfAwsFile/${first}/${second}/${id_encrypted}/{result.file_name}`}
                         dir={result.id}
                         className="public_private"
                       >
@@ -65,7 +68,7 @@ function ClientViewAttachments(props) {
 
                     <a
                       target="_blank"
-                      href="javascript:void(0)"
+                      href={`https://app.totalsprayboothcare.com/users/openPdfAwsFile/${first}/${second}/${id_encrypted}/${result.file_name}`}
                       className="marR20"
                     >
                       <span className="external-icon icons"></span>
