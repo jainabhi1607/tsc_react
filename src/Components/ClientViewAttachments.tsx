@@ -1,4 +1,4 @@
-import { encrypt, decrypt } from "../cryptoHelper";
+import { encryptPhpCompatible, decryptPhpCompatible} from "../cryptoHelper";
 
 //encrypt(text)
 
@@ -16,9 +16,15 @@ function ClientViewAttachments(props) {
             fileExtension === "doc" ||
             fileExtension === "docx"
           ) {
-            let first = encrypt(result.id.toString()+'first');
-            let second = encrypt(result.id.toString()+'Second');
-            let id_encrypted = encrypt(result.id.toString());
+            let first = encryptPhpCompatible(result.id.toString()+'first');
+            let second = encryptPhpCompatible(result.id.toString()+'Second');
+            let file_encrypted = encryptPhpCompatible(result.file_name.toString());
+            let id_encrypted = encryptPhpCompatible(result.id.toString());
+
+
+
+
+
             return (
               <>
                 <div className="col-lg-12 paddR0 paddL0">
@@ -26,7 +32,7 @@ function ClientViewAttachments(props) {
                   <label className="float-right document_attachments">
                     {props.userRole < 4 && (
                       <a
-                        href={`https://app.totalsprayboothcare.com/users/openPdfAwsFile/${first}/${second}/${id_encrypted}/{result.file_name}`}
+                        href={`https://app.totalsprayboothcare.com/users/openPdfAwsFile/${first}/${second}/${file_encrypted}/{result.file_name}`}
                         dir={result.id}
                         className="public_private"
                       >
