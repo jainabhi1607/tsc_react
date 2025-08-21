@@ -1,11 +1,64 @@
-import { encryptPhpCompatible, decryptPhpCompatible} from "../cryptoHelper";
-import { Fancybox } from "@fancyapps/ui";
-import "@fancyapps/ui/dist/fancybox.css";
+import { encryptPhpCompatible, decryptPhpCompatible } from "../cryptoHelper";
+import { Fancybox, Carousel } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
 
 //encrypt(text)
 
 function ClientViewAttachments(props) {
   let counter = 1;
+
+  const localImages = [];
+
+  const fetchAwsImages = async (jobId) => {
+    const first_arg = encryptPhpCompatible("supports");
+
+// uncomment this code
+
+    //const res = await fetch(`https://tsc.sterlinginfotech.com/admin/global_settings/gallery_images_new/${first_arg}/${first_arg}/${first_arg}/${first_arg}`);
+    // const res = await fetch("https://tsc.sterlinginfotech.com/admin/global_settings/gallery_images_new/MlFqR2l2c3lBbldIWE9DK2xZQ3VKQT09/NWorSFVNbm80RFN4dUFteGI2NGdtUT09/M0xJSDZYa2FUMWRxLzBlWlNnUHgvUT09/675");
+
+   // comment this code this is for testing. 
+    let res = [];
+    {props.data &&
+        Object.values(props.data).length > 0 &&
+        Object.values(props.data).map((result) => {
+
+          let fileExtension = result.file_name.split(".").pop().toLowerCase();
+          if (
+            fileExtension === "jpg" ||
+            fileExtension === "jpeg" ||
+            fileExtension === "png" ||
+            fileExtension === "gif"
+          ) {
+            res.push(`https://app.totalsprayboothcare.com/support_ticket_img/${result.file_name}`);
+          }
+        })};
+        console.log("res",res)
+   // return await res.json();  // [{url, caption}, ...]
+   return res;
+  };
+
+  const openGallery = async (index) => {
+    try {
+      // Example: pass jobId dynamically
+      const awsImages = await fetchAwsImages(123); 
+
+      Fancybox.show(
+        awsImages.map((img, i) => ({
+          src: img.url,
+          type: "image",
+          caption: img.caption || `Image ${i + 1}`,
+        })),
+        {
+          startIndex: index,
+          Thumbs: { autoStart: true },
+        }
+      );
+    } catch (e) {
+      console.error("Error loading AWS images:", e);
+    }
+  };
 
   return (
     <>
@@ -18,14 +71,12 @@ function ClientViewAttachments(props) {
             fileExtension === "doc" ||
             fileExtension === "docx"
           ) {
-            let first = encryptPhpCompatible(result.id.toString()+'first');
-            let second = encryptPhpCompatible(result.id.toString()+'Second');
-            let file_encrypted = encryptPhpCompatible(result.file_name.toString());
+            let first = encryptPhpCompatible(result.id.toString() + "first");
+            let second = encryptPhpCompatible(result.id.toString() + "Second");
+            let file_encrypted = encryptPhpCompatible(
+              result.file_name.toString()
+            );
             let id_encrypted = encryptPhpCompatible(result.id.toString());
-
-
-
-
 
             return (
               <>
@@ -113,8 +164,12 @@ function ClientViewAttachments(props) {
             fileExtension === "png" ||
             fileExtension === "gif"
           ) {
+            localImages.push(`https://app.totalsprayboothcare.com/support_ticket_img/${result.file_name}`);
             return (
               <>
+
+
+
                 <div className="col-lg-4 paddL0">
                   <div className="<?php if($session->read('User.role') < 4) echo 'note-box';?> marB10">
                     <div>
@@ -122,7 +177,8 @@ function ClientViewAttachments(props) {
 
                       <span className="image_span">
                         <a
-                          data-toggle="modal"
+                         key={result.id}
+                          onClick={() => openGallery(result.id)}
                           className="aws_images img-thumbnail image-thumb"
                           data-index={counter}
                           data-product-id={result.id}
