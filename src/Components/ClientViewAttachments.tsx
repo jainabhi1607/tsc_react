@@ -1,4 +1,6 @@
 import { encryptPhpCompatible, decryptPhpCompatible} from "../cryptoHelper";
+import { Fancybox } from "@fancyapps/ui";
+import "@fancyapps/ui/dist/fancybox.css";
 
 //encrypt(text)
 
@@ -74,7 +76,7 @@ function ClientViewAttachments(props) {
 
                     <a
                       target="_blank"
-                      href={`https://app.totalsprayboothcare.com/users/openPdfAwsFile/${first}/${second}/${id_encrypted}/${result.file_name}`}
+                      href={`https://app.totalsprayboothcare.com/users/openPdfAwsFile/${first}/${second}/${file_encrypted}/${result.file_name}`}
                       className="marR20"
                     >
                       <span className="external-icon icons"></span>
