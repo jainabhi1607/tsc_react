@@ -73,9 +73,7 @@ function ClientViewAttachments(props) {
           ) {
             let first = encryptPhpCompatible(result.id.toString() + "first");
             let second = encryptPhpCompatible(result.id.toString() + "Second");
-            let file_encrypted = encryptPhpCompatible(
-              result.file_name.toString()
-            );
+            let file_encrypted = encryptPhpCompatible(result.file_name.toString());
             let id_encrypted = encryptPhpCompatible(result.id.toString());
 
             return (

@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fetchserviceData } from "../Slices/serviceSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";import { encryptPhpCompatible, decryptPhpCompatible } from "../cryptoHelper";
+import { Link } from "react-router-dom";
 
 function CompletedService() {
   const dispatch = useDispatch();
   const [userId, setUserId] = useState(null);
 
   let userData = "";
+const edit = encryptPhpCompatible("edit");
 
   useEffect(() => {
     if (
@@ -37,10 +39,10 @@ function CompletedService() {
       <div class="clear"></div>
       <ul class="websites-tabs">
         <li class="ticket_status">
-          <a href="/service">Upcoming </a>
+          <Link to={`/service`}>Upcoming</Link>
         </li>
         <li class="active ticket_status">
-          <a href="/completed">Completed</a>
+          <Link to={`/completed`}>Completed</Link>
         </li>
       </ul>
       <div class="clear"></div>
@@ -61,6 +63,9 @@ function CompletedService() {
             {data?.serviceData?.results?.length > 0 &&
           Object.values(data?.serviceData?.results).length > 0 &&
           Object.values(data?.serviceData?.results).map((result) => {
+            let first = encryptPhpCompatible(result.id.toString() + "first");
+            let id_encrypted = encryptPhpCompatible(result.id.toString());
+            let user_id_encrypted = encryptPhpCompatible(userId?.toString());
                 return (
                   <>
                     <tr>
@@ -74,7 +79,11 @@ function CompletedService() {
                           {result.status_display}
                         </span>
                       </td>
-                      <td className="paddR0 paddL0"></td>
+                      <td className="paddR0 paddL0">
+
+                        <Link className="comment-operations icon" to={`/service_client_view/${edit}/${user_id_encrypted}/${id_encrypted}/${first}`}>
+                    <span class="arrow-right"></span></Link>
+                      </td>
                     </tr>
                   </>
                 );

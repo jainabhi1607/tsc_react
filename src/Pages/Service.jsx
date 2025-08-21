@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchserviceData } from "../Slices/serviceSlice";
+import { encryptPhpCompatible, decryptPhpCompatible } from "../cryptoHelper";
+import { Link } from "react-router-dom";
 
 function Service() {
 const dispatch = useDispatch();
 const [userId, setUserId] = useState(null);
 
 let userData = "";
+const edit = encryptPhpCompatible("edit");
 
 useEffect(() => {
 if (
@@ -37,10 +40,10 @@ return (
   <div class="clear"></div>
   <ul class="websites-tabs">
     <li class="active ticket_status">
-      <a href="/service">Upcoming </a>
+      <Link to={`/service`}>Upcoming</Link>
     </li>
     <li class="ticket_status">
-      <a href="/completed">Completed</a>
+      <Link to={`/completed`}>Completed</Link>
     </li>
   </ul>
   <div class="clear"></div>
@@ -61,6 +64,11 @@ return (
         {data?.serviceData?.results?.length > 0 &&
           Object.values(data?.serviceData?.results).length > 0 &&
           Object.values(data?.serviceData?.results).map((result) => {
+
+            let first = encryptPhpCompatible(result.id.toString() + "first");
+            let id_encrypted = encryptPhpCompatible(result.id.toString());
+            let user_id_encrypted = encryptPhpCompatible(userId?.toString());
+
             return (
               <>
                 <tr>
@@ -75,9 +83,8 @@ return (
                     </span>
                   </td>
                   <td className="paddR0 paddL0">
-                    <a href="#" class="comment-operations icon">
-                      <span class="arrow-right"></span>
-                    </a>
+                    <Link className="comment-operations icon" to={`/service_client_view/${edit}/${user_id_encrypted}/${id_encrypted}/${first}`}>
+                    <span class="arrow-right"></span></Link>
                   </td>
                 </tr>
               </>
