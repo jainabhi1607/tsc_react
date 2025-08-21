@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { encryptPhpCompatible } from "../cryptoHelper";
 import axios from "axios";
 
-export const fetchserviceData = createAsyncThunk("tec/fetchserviceData",
+export const fetchServiceData = createAsyncThunk("tec/fetchServiceData",
   async (userData) => {
     const result = await axios.get("https://tsc.sterlinginfotech.com/users/serviceReact/" + userData.userId+'/'+userData.completed);
     return result.data;
@@ -34,14 +34,14 @@ export const serviceSl = createSlice({
   },
    extraReducers: (builder) => {
     builder
-      .addCase(fetchserviceData.pending, (state) => {
+      .addCase(fetchServiceData.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchserviceData.fulfilled, (state, action) => {
+      .addCase(fetchServiceData.fulfilled, (state, action) => {
         state.serviceData = action.payload;
         state.loading = false;
       })
-      .addCase(fetchserviceData.rejected, (state) => {
+      .addCase(fetchServiceData.rejected, (state) => {
         state.loading = false;
         state.error = "There was an error";
       })

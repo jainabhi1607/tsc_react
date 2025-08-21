@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { fetchserviceData } from "../Slices/serviceSlice";
+import { fetchServiceData } from "../Slices/serviceSlice";
 import { useEffect, useState } from "react";import { encryptPhpCompatible, decryptPhpCompatible } from "../cryptoHelper";
 import { Link } from "react-router-dom";
 
@@ -25,7 +25,7 @@ const edit = encryptPhpCompatible("edit");
 
   useEffect(() => {
     if (userId) {
-      dispatch(fetchserviceData({ userId: userId, completed: 1 }));
+      dispatch(fetchServiceData({ userId: userId, completed: 1 }));
     }
   }, [userId]);
 

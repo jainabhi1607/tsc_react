@@ -55,11 +55,11 @@ function Sidebar() {
                 <span className="menu-item">Support Tickets</span>
               </Link>
             </li>
-            <li className="">
-              <a href="/clients">
+            <li className={location === "/clients/sites" ? "active" : ""}>
+             <Link className="" to={`/clients/sites`}>
                 <span className="user-icon menu-icon"></span>
                 <span className="menu-item">Sites</span>
-              </a>
+              </Link>
             </li>
             <li className="">
               <a href="/asset_listing">

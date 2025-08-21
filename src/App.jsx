@@ -6,6 +6,7 @@ import Service from './Pages/Service.jsx'
 import CompletedService from './Pages/CompletedService.jsx'
 import ClientView from './Pages/Supports/ClientView.jsx'
 import ServiceClientView from './Pages/Services/ClientView.jsx'
+import Sites from './Pages/Clients/Sites.jsx'
 import First from './Pages/First.jsx'
 import './bootstrap.min.css'
 import './Css/Style.css'
@@ -52,7 +53,11 @@ const router = createBrowserRouter([
       {
         path: "/support_client_view/:id",
         element: < ClientView/>
-      }
+      },
+      {
+        path: "/clients/sites",
+        element: < Sites/>
+      },
     ],
   }
 ])

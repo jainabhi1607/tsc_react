@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchserviceData } from "../Slices/serviceSlice";
+import { fetchServiceData } from "../Slices/serviceSlice";
 import { encryptPhpCompatible, decryptPhpCompatible } from "../cryptoHelper";
 import { Link } from "react-router-dom";
 
@@ -25,7 +25,7 @@ navigate("/login", { replace: true });
 
 useEffect(() => {
 if (userId) {
-dispatch(fetchserviceData({ userId: userId, completed: 0 }));
+dispatch(fetchServiceData({ userId: userId, completed: 0 }));
 }
 }, [userId]);
 
