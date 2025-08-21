@@ -11,7 +11,7 @@ export const fetchServiceData = createAsyncThunk("tec/fetchServiceData",
 export const fetchSingleServiceData = createAsyncThunk(
   "tec/fetchSingleServiceData",
   async (userData) => {
-    console.log("User ID lastest",userData.id.toString())
+    
     const edit = encryptPhpCompatible("edit");
     const first = encryptPhpCompatible(userData.id.toString() + "first");
     const user_id = encryptPhpCompatible(userData.userId.toString());

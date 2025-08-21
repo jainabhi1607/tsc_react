@@ -4,12 +4,21 @@ import axios from "axios";
 
 export const fetchClientSiteData = createAsyncThunk("tec/fetchclientData",
   async (userData) => {
-    const result = await axios.get("https://tsc.sterlinginfotech.com/users/clientReact/" + userData.userId+'/'+userData.completed);
+
+    const edit = encryptPhpCompatible("edit");
+    const first = encryptPhpCompatible(userData.id.toString() + "first");
+    const user_id = encryptPhpCompatible(userData.userId.toString());
+    const id_encrypted = userData.id.toString();
+    const result = await axios.get(
+      "https://tsc.sterlinginfotech.com/users/clientSitesReact/" +
+        edit + "/" + user_id + "/" + id_encrypted + "/" + first
+    );
+    
     return result.data;
   }
 )
 export const fetchSingleClientData = createAsyncThunk(
-  "tec/fetchSingleClientData",
+  "tec/fetchClientData",
   async (userData) => {
     console.log("User ID lastest",userData.id.toString())
     const edit = encryptPhpCompatible("edit");
@@ -17,7 +26,7 @@ export const fetchSingleClientData = createAsyncThunk(
     const user_id = encryptPhpCompatible(userData.userId.toString());
     const id_encrypted = userData.id.toString();
     const result = await axios.get(
-      "https://tsc.sterlinginfotech.com/users/clientClientViewReact/" +
+      "https://tsc.sterlinginfotech.com/users/clientSitesReact/" +
         edit + "/" + user_id + "/" + id_encrypted + "/" + first
     );
     return result.data;
