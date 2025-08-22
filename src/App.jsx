@@ -7,6 +7,9 @@ import CompletedService from './Pages/CompletedService.jsx'
 import ClientView from './Pages/Supports/ClientView.jsx'
 import ServiceClientView from './Pages/Services/ClientView.jsx'
 import Sites from './Pages/Clients/Sites.jsx'
+import ViewSite from './Pages/Clients/ViewSite.jsx'
+import SiteAssets from './Pages/Clients/SiteAssets.jsx'
+import SiteContacts from './Pages/Clients/SiteContacts.jsx'
 import First from './Pages/First.jsx'
 import './bootstrap.min.css'
 import './Css/Style.css'
@@ -57,6 +60,18 @@ const router = createBrowserRouter([
       {
         path: "/clients/sites",
         element: < Sites/>
+      },
+      {
+        path: "/clients/view_site/:edit/:userId/:id/:first",
+        element: < ViewSite/>
+      },
+      {
+        path: "/clients/site_assets/:edit/:userId/:id/:first",
+        element: < SiteAssets/>
+      },
+      {
+        path: "/clients/site_contacts/:edit/:userId/:id/:first",
+        element: < SiteContacts/>
       },
     ],
   }

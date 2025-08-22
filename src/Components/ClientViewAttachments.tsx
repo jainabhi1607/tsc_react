@@ -7,18 +7,17 @@ import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
 function ClientViewAttachments(props) {
   let counter = 1;
-
   const localImages = [];
 
   const fetchAwsImages = async (jobId) => {
     const first_arg = encryptPhpCompatible("supports");
 
-// uncomment this code
+    // uncomment this code
 
     //const res = await fetch(`https://tsc.sterlinginfotech.com/admin/global_settings/gallery_images_new/${first_arg}/${first_arg}/${first_arg}/${first_arg}`);
     // const res = await fetch("https://tsc.sterlinginfotech.com/admin/global_settings/gallery_images_new/MlFqR2l2c3lBbldIWE9DK2xZQ3VKQT09/NWorSFVNbm80RFN4dUFteGI2NGdtUT09/M0xJSDZYa2FUMWRxLzBlWlNnUHgvUT09/675");
 
-   // comment this code this is for testing. 
+    // comment this code this is for testing. 
     let res = [];
     {props.data &&
         Object.values(props.data).length > 0 &&
