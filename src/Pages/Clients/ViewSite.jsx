@@ -32,7 +32,6 @@ function ViewSite() {
   const data = useSelector(function (state) {
     return state.tscClientStore;
   });
-  console.log("client Site Details", data);
   return (
     <>
        {data?.clientSiteData?.details?.id && userId && (

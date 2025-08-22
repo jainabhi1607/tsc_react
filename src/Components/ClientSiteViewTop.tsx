@@ -11,7 +11,7 @@ function ClientSiteViewTop(props) {
 
   return (
     <>
-      <div className="col-lg-12 tooltip-demo">
+      <div className="col-lg-12 tooltip-demo paddL0 paddR0">
         <h1 className="page-heading paddB10 marB10 line-30">
           <a
             href="<?php echo Router::url('/', true);?>admin/clients/sites"
@@ -51,9 +51,7 @@ function ClientSiteViewTop(props) {
                 : "ticket_status"
             }
           >
-            <Link
-              to={`/clients/site_assets/${edit}/${user_id_encrypted}/${id_encrypted}/${first}`}
-            >
+            <Link to={`/clients/site_assets/${edit}/${user_id_encrypted}/${id_encrypted}/${first}`}>
               Assets
             </Link>
           </li>

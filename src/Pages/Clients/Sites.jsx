@@ -32,7 +32,7 @@ function Sites() {
   const data = useSelector(function (state) {
     return state.tscClientStore;
   });
-  console.log("Results",data);
+  
   return (
     <>
       <h1 className="page-heading">Sites</h1>
