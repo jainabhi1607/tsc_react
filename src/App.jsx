@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client'
+import First from './Pages/First.jsx'
 import Login from "./Pages/Login.jsx"
 import Home from "./Pages/Home.jsx"
 import CreateAccount from "./Pages/CreateAccount.jsx"
@@ -10,7 +10,7 @@ import Sites from './Pages/Clients/Sites.jsx'
 import ViewSite from './Pages/Clients/ViewSite.jsx'
 import SiteAssets from './Pages/Clients/SiteAssets.jsx'
 import SiteContacts from './Pages/Clients/SiteContacts.jsx'
-import First from './Pages/First.jsx'
+import AssetListing from './Pages/Clients/AssetListing.jsx'
 import './bootstrap.min.css'
 import './Css/Style.css'
 import './Css/Dev.css'
@@ -72,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "/clients/site_contacts/:edit/:userId/:id/:first",
         element: < SiteContacts/>
+      },
+      {
+        path: "/clients/asset_listing",
+        element: < AssetListing/>
       },
     ],
   }

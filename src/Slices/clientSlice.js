@@ -59,6 +59,22 @@ export const fetchClientSiteContactsData = createAsyncThunk(
   }
 );
 
+export const fetchClientAssetsData = createAsyncThunk(
+  "tec/fetchClientAssetData",
+  async (userData) => {
+    const edit = encryptPhpCompatible("edit");
+    const first = encryptPhpCompatible(userData.userId.toString() + "first");
+    const user_id = encryptPhpCompatible(userData.userId.toString());
+    const second = encryptPhpCompatible(userData.userId.toString() + "second");
+    console.log( "https://tsc.sterlinginfotech.com/users/clientAssetListingReact/" +
+        edit + "/" + user_id + "/" + second + "/" + first)
+    const result = await axios.get(
+      "https://tsc.sterlinginfotech.com/users/clientAssetListingReact/" +
+        edit + "/" + user_id + "/" + second + "/" + first
+    );
+    return result.data;
+  }
+);
 export const clientSl = createSlice({
   name: "clientSlice",
   initialState: {
@@ -114,6 +130,18 @@ export const clientSl = createSlice({
         state.loading = false;
       })
       .addCase(fetchClientSiteContactsData.rejected, (state) => {
+        state.loading = false;
+        state.error = "There was an error";
+      })
+      
+      .addCase(fetchClientAssetsData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchClientAssetsData.fulfilled, (state, action) => {
+        state.AssetsData = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchClientAssetsData.rejected, (state) => {
         state.loading = false;
         state.error = "There was an error";
       })

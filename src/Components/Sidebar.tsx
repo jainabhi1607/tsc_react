@@ -61,11 +61,11 @@ function Sidebar() {
                 <span className="menu-item">Sites</span>
               </Link>
             </li>
-            <li className="">
-              <a href="/asset_listing">
+            <li className={location === "/clients/asset_listing" ? "active" : ""}>
+              <Link className="" to={`/clients/asset_listing`}>
                 <span className="resources-icon menu-icon"></span>
-                <span className="menu-item">Assets </span>
-              </a>
+                <span className="menu-item">Assets</span>
+              </Link>
             </li>
             <li className="">
               <a href="/contact_listing">
