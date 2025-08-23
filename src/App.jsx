@@ -11,6 +11,7 @@ import ViewSite from './Pages/Clients/ViewSite.jsx'
 import SiteAssets from './Pages/Clients/SiteAssets.jsx'
 import SiteContacts from './Pages/Clients/SiteContacts.jsx'
 import AssetListing from './Pages/Clients/AssetListing.jsx'
+import ViewAsset from './Pages/Clients/ViewAsset.jsx'
 import './bootstrap.min.css'
 import './Css/Style.css'
 import './Css/Dev.css'
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "/clients/asset_listing",
         element: < AssetListing/>
+      },
+      {
+        path: "/clients/view_asset/:edit/:userId/:id/:first",
+        element: < ViewAsset/>
       },
     ],
   }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchClientAssetsData } from "../../Slices/clientSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ClientSiteViewTop from "../../Components/ClientSiteViewTop";
 import { encryptPhpCompatible } from "../../cryptoHelper";
 
@@ -55,9 +55,9 @@ function AssetListing() {
               </tr>
             </thead>
             <tbody>
-              {data?.AssetsData?.results &&
-                Object.values(data.AssetsData.results).length > 0 &&
-                Object.values(data.AssetsData.results).map((result) => {
+              {data?.AssetsData?.assets &&
+                Object.values(data.AssetsData.assets).length > 0 &&
+                Object.values(data.AssetsData.assets).map((result) => {
                   let first = encryptPhpCompatible(result.id.toString() + "first");
                   let id_encrypted = encryptPhpCompatible(result.id.toString());
                   let user_id_encrypted = encryptPhpCompatible(userId?.toString());
@@ -75,10 +75,10 @@ function AssetListing() {
                 day: "2-digit",
                 year: "numeric",
               })}</td>
-              <td class=""><a href="#" class="comment-operations icon">
+              <td class="">
+                <Link className="comment-operations icon" to={`/clients/view_asset/${edit}/${user_id_encrypted}/${id_encrypted}/${first}`}>
                      <span class="view-icon"></span>
-                     <span class="icon-text">View Asset</span>
-                  </a></td>
+                     <span class="icon-text">View Asset</span></Link></td>
                       </tr>
                     </>
                   );
