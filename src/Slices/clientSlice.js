@@ -125,6 +125,71 @@ export const fetchClientViewAssetData = createAsyncThunk(
   }
 );
 
+export const fetchClientAssetMaintenanceData = createAsyncThunk(
+  "tec/fetchClientAssetsMainData",
+  async (userData) => {
+    const edit = encryptPhpCompatible("edit");
+    const first = encryptPhpCompatible(userData.userId.toString() + "first");
+    const user_id = encryptPhpCompatible(userData.userId.toString());
+    const id = userData.id.toString();
+
+    const formattedDate = new Date().toLocaleDateString("es-CL", {  
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              });
+            
+    const secureCode = encryptPhpCompatible(formattedDate.toString() + "tsc-app");
+    const param = {edit: edit, user_id: user_id, id: id, first: first}
+
+    const result = await axios.post(
+      "https://tsc.sterlinginfotech.com/admin/clients/asset_maintenance/",
+      { data: param },
+        {
+          withCredentials: "include",
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer yourToken',
+            "X-Requested-With": secureCode
+          },
+        }
+    );
+    return result.data;
+  }
+);
+export const fetchClientAssetActivityData = createAsyncThunk(
+  "tec/fetchClientAssetsActiData",
+  async (userData) => {
+    const edit = encryptPhpCompatible("edit");
+    const first = encryptPhpCompatible(userData.userId.toString() + "first");
+    const user_id = encryptPhpCompatible(userData.userId.toString());
+    const id = userData.id.toString();
+
+    const formattedDate = new Date().toLocaleDateString("es-CL", {  
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              });
+            
+    const secureCode = encryptPhpCompatible(formattedDate.toString() + "tsc-app");
+    const param = {edit: edit, user_id: user_id, id: id, first: first}
+
+    const result = await axios.post(
+      "https://tsc.sterlinginfotech.com/admin/clients/asset_activity/",
+      { data: param },
+        {
+          withCredentials: "include",
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer yourToken',
+            "X-Requested-With": secureCode
+          },
+        }
+    );
+    return result.data;
+  }
+);
+
 
 export const clientSl = createSlice({
   name: "clientSlice",
@@ -204,6 +269,29 @@ export const clientSl = createSlice({
         state.loading = false;
       })
       .addCase(fetchClientViewAssetData.rejected, (state) => {
+        state.loading = false;
+        state.error = "There was an error";
+      })
+      .addCase(fetchClientAssetMaintenanceData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchClientAssetMaintenanceData.fulfilled, (state, action) => {
+        state.AssetMaintenanceData = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchClientAssetMaintenanceData.rejected, (state) => {
+        state.loading = false;
+        state.error = "There was an error";
+      })
+      
+      .addCase(fetchClientAssetActivityData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchClientAssetActivityData.fulfilled, (state, action) => {
+        state.AssetActivityData = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchClientAssetActivityData.rejected, (state) => {
         state.loading = false;
         state.error = "There was an error";
       })

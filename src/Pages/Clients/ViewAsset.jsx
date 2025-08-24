@@ -5,7 +5,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { encryptPhpCompatible } from "../../cryptoHelper";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { QRCodeCanvas } from "qrcode.react";
 import ViewAssetTop from "../../Components/ViewAssetTop";
+import AddEditAssetNotes from "./AddEditAssetNotes";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -15,6 +17,14 @@ const ViewAsset = () => {
   const { id } = useParams();
   const [userId, setUserId] = useState(null);
   const edit = encryptPhpCompatible("edit");
+  const [showModal, setShowModal] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+
+  const handleEditClick = (id) => {
+    console.log('cliked')
+    setSelectedId(id);
+    setShowModal(true);
+  };
 
   let userData = "";
 
@@ -38,8 +48,11 @@ const ViewAsset = () => {
 
   const storeData = useSelector((state) => state.tscClientStore);
   const asset = storeData?.ViewAssetData;
-  console.log("Asset Data: ", asset);
+  
   if (!asset || !asset.details) return <p className="p-4">Loading...</p>;
+
+  
+  const qrValue = `https://tsc.sterlinginfotech.com/client-asset/${asset?.details?.id}`;
 
   // ========== Chart Data ==========
   const chartLabels = Object.values(asset.type_arr || {}).map((t) => t.title);
@@ -61,24 +74,24 @@ const ViewAsset = () => {
   const chartOptions = {
     responsive: true,
     aspectRatio: 1,
-    cutout: '85%',
+    cutout: "85%",
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: '#FFF',         // ✅ Set tooltip background color
-          bodyColor:"#000",     
-          titleColor:"#000",
-        displayColors: false,            // ✅ Remove colored box
+        backgroundColor: "#FFF", // ✅ Set tooltip background color
+        bodyColor: "#000",
+        titleColor: "#000",
+        displayColors: false, // ✅ Remove colored box
         callbacks: {
-          title: () => '',               // ✅ Remove tooltip title
+          title: () => "", // ✅ Remove tooltip title
           label: (context) => {
-            const label = context.label || '';
+            const label = context.label || "";
             const value = context.raw;
-            return `${label}: ${value.toFixed(1)}%`;  // e.g., "Installation: 75%"
-          }
-        }
-      }
-    }
+            return `${label}: ${value.toFixed(1)}%`; // e.g., "Installation: 75%"
+          },
+        },
+      },
+    },
   };
 
   // ========== Format Helpers ==========
@@ -178,14 +191,9 @@ const ViewAsset = () => {
                     Last Edited:{" "}
                     {formatNoteDate(asset.details.notes_edit_date_time)}
                   </span>
-                  <a
-                    href="javascript:void(0)"
-                    rel="<?php echo $edit;?>"
-                    rev="<?php echo $one;?>"
-                    dir="<?php echo $id;?>"
-                    lang="<?php echo $second;?>"
-                    className="add_edit_asset_notes  comment-operations icon marR0"
-                  >
+
+                  <button className="add_edit_asset_notes  comment-operations icon marR0" onClick={() => handleEditClick(asset.details.id)}>
+                 
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="18 "
@@ -199,8 +207,14 @@ const ViewAsset = () => {
                       className="feather feather-edit-2"
                     >
                       <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
-                    </svg>
-                  </a>
+                    </svg></button>
+
+                    <AddEditAssetNotes
+        show={showModal}
+        handleClose={() => setShowModal(false)}
+        assetId={selectedId}
+      />
+      
                 </h3>
                 <div className="clear paddB20"></div>
                 <div>
@@ -326,6 +340,12 @@ const ViewAsset = () => {
           </div>
           <div className="table-responsive">
             <div>
+              <input
+                type="hidden"
+                name="copy_link"
+                id="copy_link"
+                value={qrValue}
+              />
               <span className="bold600 float-left font-16">QR Code</span>
             </div>
             <div className="clear paddB20"></div>
@@ -334,11 +354,15 @@ const ViewAsset = () => {
               the spot asset information and maintenance tracking.
             </div>
             <div className="clear paddB20"></div>
-            <div className="col-lg-5 paddL0 paddR0">
-              <img
-                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://tsc.sterlinginfotech.com/client-asset/${asset.details.id}`}
-                alt="QR Code"
-                className="mx-100"
+            <div className="col-lg-5 paddR0 paddL0">
+              <QRCodeCanvas
+                id="coloredQR"
+                value={qrValue}
+                size={122}
+                bgColor="#ffffff"
+                fgColor="#00AEEF" // ✅ Changed color here
+                level="H"
+                includeMargin={true}
               />
             </div>
             <div className="col-lg-7 paddR0">
@@ -346,7 +370,9 @@ const ViewAsset = () => {
               <div>
                 <a
                   id="downloadLink"
-                  href="javascript:void(0)"
+                  href={document
+                    .getElementById("coloredQR")
+                    ?.toDataURL("image/png")}
                   download="qrcode.png"
                   className="border-box-transparent"
                 >
@@ -357,9 +383,9 @@ const ViewAsset = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className="feather feather-download"
                   >
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -369,12 +395,14 @@ const ViewAsset = () => {
                   <span> Download</span>
                 </a>
               </div>
+
               <div className="clear paddB20"></div>
               <div>
                 <a
-                  href={`https://tsc.sterlinginfotech.com/client-asset/${asset.details.id}`}
+                  href={qrValue}
                   className="border-box-transparent"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -383,16 +411,15 @@ const ViewAsset = () => {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="#2A2A2A"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className="feather feather-external-link"
                   >
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
                     <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                    <line x1="10" y1="14" x2="21 3"></line>
                   </svg>
-
                   <span> Visit URL</span>
                 </a>
               </div>

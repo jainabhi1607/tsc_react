@@ -16,3 +16,4 @@ html body{background-color: #FFF;}
 .sidebar-top{background: #272D34;padding-top: 12px;
   height: 54px;}
 .mx-100{max-width: 100%;}
+.nav > li{width: 100%;}

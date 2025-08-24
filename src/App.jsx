@@ -12,6 +12,8 @@ import SiteAssets from './Pages/Clients/SiteAssets.jsx'
 import SiteContacts from './Pages/Clients/SiteContacts.jsx'
 import AssetListing from './Pages/Clients/AssetListing.jsx'
 import ViewAsset from './Pages/Clients/ViewAsset.jsx'
+import AssetMaintenance from './Pages/Clients/AssetMaintenance.jsx'
+import AssetActivity from './Pages/Clients/AssetActivity.jsx'
 import './bootstrap.min.css'
 import './Css/Style.css'
 import './Css/Dev.css'
@@ -20,6 +22,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store.js";
 import Support from './Pages/Support.jsx'
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 
 const router = createBrowserRouter([
   {
@@ -81,6 +87,14 @@ const router = createBrowserRouter([
       {
         path: "/clients/view_asset/:edit/:userId/:id/:first",
         element: < ViewAsset/>
+      },
+      {
+        path: "/clients/asset_maintenance/:edit/:userId/:id/:first",
+        element: < AssetMaintenance/>
+      },
+      {
+        path: "/clients/asset_activity/:edit/:userId/:id/:first",
+        element: < AssetActivity/>
       },
     ],
   }

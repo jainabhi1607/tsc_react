@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchClientAssetsData } from "../../Slices/clientSlice";
+import { fetchClientAssetMaintenanceData } from "../../Slices/clientSlice";
 import { Link, useParams } from "react-router-dom";
 import { encryptPhpCompatible } from "../../cryptoHelper";
+import ViewAssetTop from "../../Components/ViewAssetTop";
 
-function AssetListing() {
+function AssetMaintenance() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [userId, setUserId] = useState(null);
@@ -26,7 +27,7 @@ function AssetListing() {
 
   useEffect(() => {
     if (userId) {
-      dispatch(fetchClientAssetsData({ userId: userId, id: id }));
+      dispatch(fetchClientAssetMaintenanceData({ userId: userId, id: id }));
     }
   }, [userId]);
 
@@ -36,20 +37,20 @@ function AssetListing() {
   console.log(data);
   return (
     <>
-      <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="parent-page-class listing-page">
-          <div class="col-lg-12">
-            <h1 class="page-heading">Assets</h1>
-            <div class="blue-line marT20 marB30"></div>
-          </div>
+        <ViewAssetTop
+        id={data?.details?.id}
+        user_id={userId}
+        machine_name={data?.details?.machine_name}
+        site_name={data?.details?.ClientSites?.site_name}
+        action="view_asset"
+      />
           <table className="table table-striped table-hover dataTables-example10">
             <thead>
               <tr role="row">
-                <th className="paddL20">Machine Name</th>
-                <th>Serial Number</th>
-                <th>Client Name</th>
-                <th>Client Site</th>
-                <th>Last Ticket</th>
+                <th className="paddL20">Ticket No.</th>
+                <th>Job Type</th>
+                <th>Date Allocated</th>
+                <th>Status</th>
                 <th></th>
               </tr>
             </thead>
@@ -84,10 +85,8 @@ function AssetListing() {
                 })}
             </tbody>
           </table>
-        </div>
-      </div>
     </>
   );
 }
 
-export default AssetListing;
+export default AssetMaintenance;
