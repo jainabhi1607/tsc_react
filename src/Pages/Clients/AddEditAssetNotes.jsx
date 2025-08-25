@@ -69,25 +69,27 @@ const AddEditAssetNotes = ({ show, handleClose, assetId }) => {
     <ModalComponent
       show={show}
       handleClose={handleClose}
-      title="Edit Notes"
-      footer={
-        <>
-          <button className="btn btn-secondary" onClick={handleClose}>
-            Cancel
-          </button>
-          <button className="btn btn-primary" onClick={handleSubmit} disabled={loading}>
-            {loading ? "Saving..." : "Save Changes"}
-          </button>
-        </>
-      }
+      title=" Change Notes"
     >
       {loading ? (
-        <p>Loading...</p>
+        ''
       ) : (
         <form>
           <div className="mb-3">
             <label className="form-label">Notes</label>
-            <textarea name="name" className="form-control" onChange={handleChange}></textarea>
+            <textarea name="name" className="form-control" rows="5" onChange={handleChange}></textarea>
+          </div>
+          <div class="clear popup-divider"></div>
+          <div class="col-lg-12 paddL0 paddR0">
+            <div class=""> 
+          <button className="btn btn-lg btn-primary" onClick={handleSubmit} disabled={loading}>
+            {loading ? "Saving..." : "Save"}
+          </button>
+              <a class="gray-color paddL20" href="#" onClick={(e) => {
+            e.preventDefault();
+            handleClose(); // closes via React state
+          }}>Cancel</a>
+            </div>
           </div>
         </form>
       )}

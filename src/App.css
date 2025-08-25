@@ -17,3 +17,18 @@ html body{background-color: #FFF;}
   height: 54px;}
 .mx-100{max-width: 100%;}
 .nav > li{width: 100%;}
+.green-btn, .green-btn.btn:hover {
+  color: #FFF !important;
+  background-color: #00AEEF !important;
+}
+body .fade{opacity: 1;}
+body .modal-body{padding: 20px 50px 16px 50px;}
+body .modal-content {
+  border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+ body .modal .modal-dialog {
+    margin: 40px auto;
+  }
+}
